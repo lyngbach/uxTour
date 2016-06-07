@@ -123,7 +123,7 @@ uxTour.prototype.showStep = function () {
 		padding = (step.padding ? step.padding : this.options.padding);
 		element = document.getElementById(step.element);
 
-		step.style = step.style || 'absolute';
+		step.position = step.position || 'absolute';
 
 		if (element === null) {
 			this.currentStep = (this.currentStep += 1);
@@ -148,7 +148,7 @@ uxTour.prototype.showStep = function () {
 			this.highlight.style.width = rect.width + 'px';
 			this.highlight.style.height = (this.options.frame === 'circle' ? rect.width : rect.height) + 'px';
 
-			if (step.style === 'fixed') {
+			if (step.position === 'fixed') {
 				this.highlight.style.top = (rect.top - padding + (marginTop + padding)) + 'px';
 			} else {
 				this.highlight.style.top = (rect.top + window.pageYOffset + marginTop) + 'px';
@@ -160,7 +160,7 @@ uxTour.prototype.showStep = function () {
 			this.highlight.style.width = (this.options.frame === 'circle' ? rect.height : rect.width) + 'px';
 			this.highlight.style.height = rect.height + 'px';
 			
-			if (step.style === 'fixed') {
+			if (step.position === 'fixed') {
 				this.highlight.style.top = (rect.top - padding) + 'px';
 			} else {
 				this.highlight.style.top = (rect.top + window.pageYOffset - padding) + 'px';
@@ -191,8 +191,8 @@ uxTour.prototype.showStep = function () {
 uxTour.prototype.setStyle = function (element, step) {
 	'use strict';
 
-	if (step.style) {
-		element.style.position = step.style;
+	if (step.position) {
+		element.style.position = step.position;
 	} else {
 		element.style.position = 'absolute';
 	}
@@ -239,26 +239,26 @@ uxTour.prototype.setText = function (step) {
 	var element = document.getElementById(step.element),
 		elementRect = element.getBoundingClientRect(),
 		tooltipRect = this.tooltip.getBoundingClientRect(),
-		position = step.position || 'bottom',
+		direction = step.direction || 'bottom',
 		marginTop = (elementRect.width > elementRect.height ? elementRect.width : elementRect.height);
 
 	this.setStyle(this.tooltip, step);
 
-	if (position === 'top') {
-		if (step.style === 'fixed') {
+	if (direction === 'top') {
+		if (step.position === 'fixed') {
 			this.tooltip.style.top = (elementRect.top - marginTop - tooltipRect.height - 50) + 'px';
 		} else {
 			console.log('tooltipRect.height', tooltipRect.height);
 			this.tooltip.style.top = (elementRect.top + window.pageYOffset - (marginTop / 2) - tooltipRect.height - 50) + 'px';
 		}
-	} else if (position === 'bottom') {
-		if (step.style === 'fixed') {
+	} else if (direction === 'bottom') {
+		if (step.position === 'fixed') {
 			this.tooltip.style.top = (elementRect.top + elementRect.height + 50) + 'px';
 		} else {
 			this.tooltip.style.top = (elementRect.top + window.pageYOffset + marginTop + 50) + 'px';
 		}		
 	} else {
-		if (step.style === 'fixed') {
+		if (step.position === 'fixed') {
 			this.tooltip.style.top = (elementRect.top + elementRect.height + 50) + 'px';
 		} else {
 			this.tooltip.style.top = (elementRect.top + window.pageYOffset + marginTop + 50) + 'px';
