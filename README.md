@@ -3,11 +3,11 @@ UX tour guide plugin in a single plain vanilla JavaScript file.
 
 Introduction
 --------
-So I was browsing around trying to find some nice feature tour overlay plugins for a project. However there was only a few who met the design criteria and even less who could actually compete with the projects needs. In fact there was zero plugins who could meet the requirements of a single page material design applikation with several fixed elements and therefor I came up with this little plugin, specifically made for 3 main purpose.
+So I was browsing around trying to find some nice feature tour overlay plugins for a project. However there was only a few who met the design criteria and even less who could actually compete with the projects needs. In fact there was zero plugins who could meet the requirements of a single page material design applikation with several fixed elements and therefor I came up with this little plugin, specifically made for 3 main purposes.
 
 1. Avoid the dreaded z-index crap that every browser and every applikation have different ways of handling along with fixed position elements.
 2. Make it work dynamically for single page applikations like with the Angular framework.
-3. Make it feel more for the Material Design guidelines.
+3. Make it feel more of the Material Design guidelines.
 
 A short demo can be viewed here (link on its way).
 
@@ -32,12 +32,12 @@ var tour = {
 };
 ```
 
-Then you init the tour:
+Then you just start the tour:
 ```js
 uxTour.start(tour);
 ```
 
-If you forexample want it to work with a single page applikation you just dynamically empty and add new steps to fit your applikations logic.
+If you for example want it to work with a single page applikation you just dynamically empty and add new steps to fit your applikations logic.
 
 
 Options
@@ -53,7 +53,7 @@ The plugin comes with some few optional properties that allow you to customize t
 | buttonText	| string	| GOT IT	| Default is english Material Design text in caps. Set to fit your language needs	 	|
 | frame      	| string	| circle	| Make it a square instead of a cricle to frame the element by adding the string 'box'	 	|
 
-An exmaple could be:
+An example could be:
 ```js
 var uxTour = new uxTour({
     opacity: 0.8,
@@ -63,7 +63,7 @@ var uxTour = new uxTour({
 
 Step options
 --------
-When you prepare the steps you can add a few additional steps-only properties to make the fit your applikation logic more:
+When you prepare the steps you can add a few additional steps-only properties to make it the fit your applikation even more:
 
 | Property		| Type		| Default	| Description																|
 | ------------- | --------- | --------- | ------------------------------------------------------------------------- |
