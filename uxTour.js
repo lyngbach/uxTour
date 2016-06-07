@@ -1,5 +1,5 @@
 //
-// uxTour.js v0.1.0
+// uxTour.js v0.2.0
 //
 // https://github.com/lyngbach/uxTour
 //
@@ -20,12 +20,10 @@ var uxTour = function (options) {
 
 	this.resizeTimeout;
 	this.rgba = 'rgba(' + this.options.color.r + ', ' + this.options.color.g + ', ' + this.options.color.b +', 0)';
-	//console.log(this.hex2rgb('#2196F3'));
 	
 	this.onBrowserResize = function () {
-		var that = this;
-
 		clearTimeout(this.resizeTimeout);
+		
 		this.resizeTimeout = setTimeout(this.adjust.bind(this), 150);
 	};
 
@@ -133,7 +131,7 @@ uxTour.prototype.showStep = function () {
 		}
 
 		rect = element.getBoundingClientRect();
-		console.log('rect');
+		
 		if (rect.top === 0 && rect.right === 0 && rect.bottom === 0 && rect.left === 0) {
 			this.currentStep = (this.currentStep += 1);
 			this.showStep();
@@ -177,16 +175,9 @@ uxTour.prototype.showStep = function () {
 		this.setStyle(this.highlight, step);
 		this.scroll(document.body, (rect.top + window.pageYOffset - step.offset), 800);
 		
-			
-
 		this.currentStep = (this.currentStep += 1);
 	}	
 };
-
-/*uxTour.prototype.showNext = function () {
-	console.log('showing next step!');
-	console.log('next step is:', (this.currentStep + 1));	
-};*/
 
 uxTour.prototype.setStyle = function (element, step) {
 	'use strict';
@@ -248,7 +239,6 @@ uxTour.prototype.setText = function (step) {
 		if (step.position === 'fixed') {
 			this.tooltip.style.top = (elementRect.top - marginTop - tooltipRect.height - 50) + 'px';
 		} else {
-			console.log('tooltipRect.height', tooltipRect.height);
 			this.tooltip.style.top = (elementRect.top + window.pageYOffset - (marginTop / 2) - tooltipRect.height - 50) + 'px';
 		}
 	} else if (direction === 'bottom') {
