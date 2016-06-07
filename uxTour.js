@@ -1,5 +1,5 @@
 //
-// uxTour.js v0.2.0
+// uxTour.js v0.2.1
 //
 // https://github.com/lyngbach/uxTour
 //
@@ -17,6 +17,7 @@ var uxTour = function (options) {
 	this.options.color = this.hex2rgb(this.options.color || '#000000');
 	this.options.buttonText = this.options.buttonText || 'GOT IT';
 	this.options.frame = this.options.frame || 'circle';
+	this.options.offset = this.options.offset || 100;
 
 	this.resizeTimeout;
 	this.rgba = 'rgba(' + this.options.color.r + ', ' + this.options.color.g + ', ' + this.options.color.b +', 0)';
@@ -109,6 +110,9 @@ uxTour.prototype.showStep = function () {
 	'use strict';
 
 	var step = this.tour.steps[this.currentStep],
+		browser = this.getPrefix(),
+		prefix = (browser.dom === 'Moz' ? browser.js : browser.lowercase),
+		documentBody = (browser.lowercase === 'webkit' ? document.body : document.documentElement),
 		padding,
 		element,
 		rect,
@@ -153,7 +157,7 @@ uxTour.prototype.showStep = function () {
 			}
 			
 			this.highlight.style.left = (rect.left + window.pageXOffset - padding) + 'px';
-			this.highlight.style[this.getPrefix().lowercase + 'Transform'] = 'translate3d(0, -50%, 0)';
+			this.highlight.style[prefix + 'Transform'] = 'translate3d(0, -50%, 0)';
 		} else {
 			this.highlight.style.width = (this.options.frame === 'circle' ? rect.height : rect.width) + 'px';
 			this.highlight.style.height = rect.height + 'px';
@@ -165,15 +169,16 @@ uxTour.prototype.showStep = function () {
 			}
 			
 			this.highlight.style.left = (rect.left + window.pageXOffset + marginLeft) + 'px';
-			this.highlight.style[this.getPrefix().lowercase + 'Transform'] = 'translate3d(-50%, 0, 0)';
+			this.highlight.style[prefix + 'Transform'] = 'translate3d(-50%, 0, 0)';
 		}
 
-		step.offset = step.offset || 100;
+		step.offset = step.offset || this.options.offset;
 
 		this.paragraph.innerHTML = step.text;
 		this.setText(step);
 		this.setStyle(this.highlight, step);
-		this.scroll(document.body, (rect.top + window.pageYOffset - step.offset), 800);
+		
+		this.scroll(documentBody, (rect.top + window.pageYOffset - step.offset), 800);
 		
 		this.currentStep = (this.currentStep += 1);
 	}	
@@ -232,7 +237,7 @@ uxTour.prototype.setText = function (step) {
 		tooltipRect = this.tooltip.getBoundingClientRect(),
 		direction = step.direction || 'bottom',
 		marginTop = (elementRect.width > elementRect.height ? elementRect.width : elementRect.height);
-
+		
 	this.setStyle(this.tooltip, step);
 
 	if (direction === 'top') {
