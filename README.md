@@ -9,7 +9,7 @@ So I was browsing around trying to find some nice feature tour overlay plugins f
 2. Make it work dynamically for single page applikations like with the Angular framework.
 3. Make it feel more of the Material Design guidelines.
 
-A short demo can be viewed [here](http://uxtour.lyngbach.com/demo/).
+A short demo can be viewed <a href="http://uxtour.lyngbach.com/demo/" target="_blank">here</a>.
 
 
 Usage
