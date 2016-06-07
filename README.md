@@ -80,7 +80,7 @@ var tour = {
         {
             element: 'idOfTheElement',
             text: 'Her you add some text to this step,
-            position: 'fixed' // good for fixed header elements or floating action buttons
+            position: 'fixed', // good for fixed header elements or floating action buttons
             direction: 'top' // shows the text above the highlighed area
         }
     ]
