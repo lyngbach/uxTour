@@ -137,8 +137,6 @@ uxTour.prototype.showStep = function () {
 		}
 
 		rect = element.getBoundingClientRect();
-
-		console.log('rect', rect);
 		
 		if (rect.top === 0 && rect.right === 0 && rect.bottom === 0 && rect.left === 0) {
 			this.currentStep = (this.currentStep += 1);
