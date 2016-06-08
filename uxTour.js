@@ -1,5 +1,5 @@
 //
-// uxTour.js v0.2.1
+// uxTour.js v0.2.2
 //
 // https://github.com/lyngbach/uxTour
 //
@@ -21,6 +21,8 @@ var uxTour = function (options) {
 
 	this.resizeTimeout;
 	this.rgba = 'rgba(' + this.options.color.r + ', ' + this.options.color.g + ', ' + this.options.color.b +', 0)';
+
+	console.log('getPrefix', this.getPrefix());
 	
 	this.onBrowserResize = function () {
 		clearTimeout(this.resizeTimeout);
@@ -58,7 +60,7 @@ uxTour.prototype.start = function (tour) {
 		this.overlay.style.cssText = 'position: fixed; z-index: 999990; top: 0; left: 0; width: 100%; height: 100%;';
 
 		this.highlight.id = 'uxHighlight';
-		this.highlight.style.cssText = 'position: absolute; z-index: 999991; border-radius: ' + (this.options.frame === 'circle' ? '50' : '0') + '%; box-shadow: 0 0 0 99999px ' + this.rgba + '; top: 0; left: 0; ' + this.getPrefix().css + 'transition: 0.3s ease;';
+		this.highlight.style.cssText = 'position: absolute; z-index: 999991; border-radius: ' + (this.options.frame === 'circle' ? '50' : '0') + '%; box-shadow: 0 0 0 9999px ' + this.rgba + '; top: 0; left: 0; ' + this.getPrefix().css + 'transition: 0.3s ease;';
 		this.highlight.style.padding = this.options.padding + 'px';
 
 		this.tooltip.id = 'uxTooltip';
@@ -135,6 +137,8 @@ uxTour.prototype.showStep = function () {
 		}
 
 		rect = element.getBoundingClientRect();
+
+		console.log('rect', rect);
 		
 		if (rect.top === 0 && rect.right === 0 && rect.bottom === 0 && rect.left === 0) {
 			this.currentStep = (this.currentStep += 1);
@@ -219,8 +223,9 @@ uxTour.prototype.close = function () {
 };
 
 uxTour.prototype.fadeIn = function () {
+	this.boxShadow = navigator.userAgent.toLowerCase().indexOf('safari') > -1 ? '1900' : '9999';
 	this.tooltip.style.opacity = 1;
-	this.highlight.style.boxShadow = '0 0 0 99999px rgba(' + this.options.color.r + ', ' + this.options.color.g + ', ' + this.options.color.b +', ' + this.options.opacity + ')';
+	this.highlight.style.boxShadow = '0 0 0 ' + this.boxShadow + 'px rgba(' + this.options.color.r + ', ' + this.options.color.g + ', ' + this.options.color.b +', ' + this.options.opacity + ')';
 };
 
 uxTour.prototype.fadeOut = function () {
